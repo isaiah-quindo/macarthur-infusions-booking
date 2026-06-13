@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: mi-booking-db
+    environment:
+      POSTGRES_DB: mi_booking
+      POSTGRES_USER: mi_booking
+      POSTGRES_PASSWORD: mi_booking
+    ports:
+      - "54329:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mi_booking"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  db-data:
