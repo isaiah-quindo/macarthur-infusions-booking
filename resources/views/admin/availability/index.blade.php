@@ -11,26 +11,31 @@
         $dayShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     @endphp
 
-    {{-- Clinic capacity --}}
+    {{-- Clinic settings --}}
     <x-ui.card class="mt-6">
-        <div class="flex flex-wrap items-end justify-between gap-4">
-            <div>
-                <h2 class="text-lg font-semibold">Clinic capacity</h2>
-                <p class="mt-1 text-sm text-brand-muted">
-                    How many patients can be in treatment at the same time. Each booked appointment counts as one.
+        <h2 class="text-lg font-semibold">Clinic settings</h2>
+        <form method="post" action="{{ route('admin.availability.settings') }}" class="mt-4 flex flex-wrap items-end gap-4">
+            @csrf
+            <div class="min-w-56 flex-1">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Concurrent capacity</label>
+                <input type="number" name="concurrent_capacity" min="1" max="50" required
+                       value="{{ old('concurrent_capacity', $settings->concurrent_capacity) }}"
+                       class="w-28 rounded-lg border border-brand-border px-3 py-2 text-sm">
+                <p class="mt-1.5 text-xs text-brand-muted">
+                    How many patients can be in treatment at the same time.
                 </p>
             </div>
-            <form method="post" action="{{ route('admin.availability.settings') }}" class="flex items-end gap-2">
-                @csrf
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Concurrent capacity</label>
-                    <input type="number" name="concurrent_capacity" min="1" max="50" required
-                           value="{{ old('concurrent_capacity', $settings->concurrent_capacity) }}"
-                           class="w-28 rounded-lg border border-brand-border px-3 py-2 text-sm">
-                </div>
-                <x-ui.button type="submit" variant="secondary" class="cursor-pointer">Save</x-ui.button>
-            </form>
-        </div>
+            <div class="min-w-56 flex-1">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-brand-muted mb-1.5">Booking window (days ahead)</label>
+                <input type="number" name="max_advance_days" min="1" max="365" required
+                       value="{{ old('max_advance_days', $settings->max_advance_days) }}"
+                       class="w-28 rounded-lg border border-brand-border px-3 py-2 text-sm">
+                <p class="mt-1.5 text-xs text-brand-muted">
+                    How far ahead patients can book. {{ (int) old('max_advance_days', $settings->max_advance_days) }} days ≈ {{ number_format(((int) old('max_advance_days', $settings->max_advance_days)) / 30, 1) }} months.
+                </p>
+            </div>
+            <x-ui.button type="submit" variant="secondary" class="cursor-pointer">Save</x-ui.button>
+        </form>
     </x-ui.card>
 
     <div class="mt-6 grid gap-6 lg:grid-cols-2">

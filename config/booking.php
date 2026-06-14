@@ -28,11 +28,23 @@ return [
 
     'nurse_notification_email' => env('NURSE_NOTIFICATION_EMAIL', 'macarthurinfusions@outlook.com.au'),
 
+    // Currently-published versions of the legal documents stored under
+    // resources/legal/. The booking form shows these, and the version
+    // string is persisted alongside each consent record so we can prove
+    // exactly which text a patient agreed to. To publish an update, drop
+    // a new dated file in resources/legal/ and bump the version here —
+    // never edit a published file.
+    'legal' => [
+        'privacy_policy_version' => '2026-06-14',
+        'collection_notice_version' => '2026-06-14',
+    ],
+
     'clinic' => [
         'name' => 'Macarthur Infusions',
         'address' => 'Suite 1, 67 Jacaranda Ave, Bradbury NSW 2560',
         'phone' => '1300 205 970',
         'website' => 'https://macarthurinfusions.com.au',
+        'privacy_email' => env('PRIVACY_CONTACT_EMAIL', 'privacy@macarthurinfusions.com.au'),
         'cancellation_policy' => 'Please give us at least 24 hours notice if you need to cancel or reschedule — call 1300 205 970 and we will look after you.',
     ],
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\LegalController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Webhooks\SquareController as SquareWebhookController;
@@ -34,6 +35,9 @@ Route::post('/booking/{booking:reference}/verify', [BookingController::class, 'v
     ->middleware('throttle:10,1')->name('booking.verify');
 
 Route::post('/webhooks/square', SquareWebhookController::class)->name('webhooks.square');
+
+Route::get('/privacy', [LegalController::class, 'privacy'])->name('legal.privacy');
+Route::get('/privacy/collection-notice', [LegalController::class, 'collectionNotice'])->name('legal.collection-notice');
 
 /*
 |--------------------------------------------------------------------------

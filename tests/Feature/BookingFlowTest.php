@@ -51,6 +51,7 @@ class BookingFlowTest extends TestCase
             'time' => '10:00',
             'notes' => 'First visit',
             'payment_method' => 'card',
+            'consent_privacy' => '1',
             'website' => '',
         ], $overrides);
     }

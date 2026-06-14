@@ -48,6 +48,7 @@
             <div class="sm:text-right">
                 <div><a href="tel:1300205970" class="hover:text-brand-cream transition">{{ config('booking.clinic.phone') }}</a></div>
                 <div class="mt-1"><a href="{{ config('booking.clinic.website') }}" class="hover:text-brand-cream transition">macarthurinfusions.com.au</a></div>
+                <div class="mt-1"><a href="{{ route('legal.privacy') }}" class="hover:text-brand-cream transition">Privacy Policy</a></div>
             </div>
         </div>
     </footer>

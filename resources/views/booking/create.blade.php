@@ -283,6 +283,24 @@
                                 <input type="hidden" name="payment_method" :value="paymentMethod">
                             @endif
 
+                            <div class="rounded-lg border border-brand-border bg-brand-mist/40 p-3.5 space-y-3">
+                                <p class="text-xs text-brand-muted leading-relaxed">
+                                    Macarthur Infusions collects the personal and health information above to provide your treatment, manage your booking and payment, send you appointment reminders, and meet our legal obligations under the
+                                    <em>Privacy Act 1988 (Cth)</em>. We store your information in Australia and only share it with the providers needed to run the service (e.g. our payment provider and email provider). You can access or correct your information, or withdraw consent, by contacting us at <a href="mailto:{{ config('booking.clinic.privacy_email', 'privacy@macarthurinfusions.com.au') }}" class="font-semibold text-brand-teal underline">{{ config('booking.clinic.privacy_email', 'privacy@macarthurinfusions.com.au') }}</a>. Full details: <a href="{{ route('legal.privacy') }}" target="_blank" rel="noopener" class="font-semibold text-brand-teal underline">Privacy Policy</a>.
+                                </p>
+
+                                <label class="flex cursor-pointer items-start gap-2.5">
+                                    <input type="checkbox" name="consent_privacy" value="1"
+                                           {{ old('consent_privacy') ? 'checked' : '' }} required
+                                           class="mt-0.5 size-4 rounded border-brand-border text-brand-green focus:ring-brand-green">
+                                    <span class="text-sm text-brand-teal-deep">
+                                        I have read the <a href="{{ route('legal.privacy') }}" target="_blank" rel="noopener" class="font-semibold underline">Privacy Policy</a> and Collection Notice and consent to Macarthur Infusions collecting and storing my personal and health information for the purposes described above.
+                                        <span class="text-red-600">*</span>
+                                    </span>
+                                </label>
+                                @error('consent_privacy')<p class="text-sm text-red-600">{{ $message }}</p>@enderror
+                            </div>
+
                             <x-ui.button type="submit" variant="primary" class="w-full"
                                          x-bind:disabled="!selectedDate || !selectedTime">
                                 <span x-text="paymentMethod === 'in_person' ? 'Confirm booking' : 'Continue to payment'">Continue to booking</span>

@@ -138,7 +138,11 @@ class AdminTest extends TestCase
             'customer_name' => 'Walk In', 'customer_email' => 'walkin@example.com', 'customer_phone' => '0411',
         ])->assertSessionHas('status');
 
-        $this->assertSame(BookingStatus::Confirmed, Booking::where('customer_name', 'Walk In')->sole()->status);
+        // customer_name is encrypted at rest — can't WHERE on it. Pull
+        // the new booking by recency and assert in PHP.
+        $created = Booking::latest('id')->first();
+        $this->assertSame('Walk In', $created->customer_name);
+        $this->assertSame(BookingStatus::Confirmed, $created->status);
 
         $service = Service::where('slug', 'b12')->sole();
         $this->actingAs($this->admin)->patch(route('admin.services.update', $service->id), [

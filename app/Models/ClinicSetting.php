@@ -11,11 +11,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ClinicSetting extends Model
 {
-    protected $fillable = ['concurrent_capacity'];
+    protected $fillable = ['concurrent_capacity', 'max_advance_days'];
 
     protected function casts(): array
     {
-        return ['concurrent_capacity' => 'integer'];
+        return [
+            'concurrent_capacity' => 'integer',
+            'max_advance_days' => 'integer',
+        ];
     }
 
     /**

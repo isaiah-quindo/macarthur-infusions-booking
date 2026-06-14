@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Payments\PaymentGateway;
 use App\Payments\SquareGateway;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,6 +21,13 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Force HTTPS in production so generated URLs (links in emails,
+        // payment-return URLs, etc.) never downgrade to http and so cookies
+        // marked Secure are actually emitted.
+        if ($this->app->isProduction()) {
+            URL::forceScheme('https');
+        }
+
         // Super admins and admins both pass — the only difference is that
         // super admins are excluded from booking-notification emails (see
         // User::adminEmails).

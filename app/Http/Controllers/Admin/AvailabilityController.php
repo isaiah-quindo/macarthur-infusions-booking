@@ -26,11 +26,12 @@ class AvailabilityController extends Controller
     {
         $data = $request->validate([
             'concurrent_capacity' => ['required', 'integer', 'min:1', 'max:50'],
+            'max_advance_days' => ['required', 'integer', 'min:1', 'max:365'],
         ]);
 
         ClinicSetting::current()->update($data);
 
-        return back()->with('status', 'Clinic capacity updated.');
+        return back()->with('status', 'Clinic settings updated.');
     }
 
     public function storeRule(Request $request)

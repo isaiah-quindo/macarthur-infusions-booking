@@ -42,7 +42,7 @@ class AvailabilityService
     public function windowEnd(): CarbonImmutable
     {
         return CarbonImmutable::now($this->clinicTimezone())
-            ->addDays(config('booking.max_advance_days'))
+            ->addDays(ClinicSetting::current()->max_advance_days)
             ->endOfDay();
     }
 

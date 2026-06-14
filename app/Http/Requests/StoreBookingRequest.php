@@ -23,6 +23,9 @@ class StoreBookingRequest extends FormRequest
             'time' => ['required', 'date_format:H:i'],
             'notes' => ['nullable', 'string', 'max:2000'],
             'payment_method' => ['required', Rule::enum(PaymentMethod::class)],
+            // Consent capture (Privacy Act / APP 5). Must be ticked — Laravel's
+            // `accepted` rule treats "1"/"true"/"yes"/"on" as accepted.
+            'consent_privacy' => ['accepted'],
             // Honeypot — humans never fill this.
             'website' => ['prohibited'],
         ];
@@ -32,6 +35,7 @@ class StoreBookingRequest extends FormRequest
     {
         return [
             'website.prohibited' => 'Submission rejected.',
+            'consent_privacy.accepted' => 'Please confirm you have read the Privacy Policy and Collection Notice to continue.',
         ];
     }
 }

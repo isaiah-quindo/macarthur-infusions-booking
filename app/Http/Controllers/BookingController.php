@@ -9,6 +9,7 @@ use App\Http\Requests\StoreBookingRequest;
 use App\Mail\BookingConfirmationMail;
 use App\Mail\NewBookingAlertMail;
 use App\Models\Booking;
+use App\Models\BookingConsent;
 use App\Models\Service;
 use App\Models\User;
 use App\Services\AvailabilityService;
@@ -83,7 +84,7 @@ class BookingController extends Controller
                     throw new SlotUnavailableException;
                 }
 
-                return Booking::create([
+                $booking = Booking::create([
                     'reference' => Booking::generateReference(),
                     'service_id' => $service->id,
                     'starts_at' => $start->utc(),
@@ -99,6 +100,20 @@ class BookingController extends Controller
                         ? null
                         : CarbonImmutable::now()->addMinutes(config('booking.hold_minutes')),
                 ]);
+
+                // Snapshot the consent at the exact text version the patient
+                // just saw. Persisted in the same transaction so a booking
+                // without a consent row is impossible.
+                BookingConsent::create([
+                    'booking_id' => $booking->id,
+                    'privacy_policy_version' => config('booking.legal.privacy_policy_version'),
+                    'collection_notice_version' => config('booking.legal.collection_notice_version'),
+                    'consented_at' => CarbonImmutable::now(),
+                    'consent_ip' => $request->ip(),
+                    'consent_user_agent' => substr((string) $request->userAgent(), 0, 500),
+                ]);
+
+                return $booking;
             });
         } catch (SlotUnavailableException) {
             return back()->withInput()->with('error',

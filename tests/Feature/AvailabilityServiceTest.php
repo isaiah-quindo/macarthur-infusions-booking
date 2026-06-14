@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\BookingStatus;
 use App\Models\AvailabilityRule;
 use App\Models\Booking;
+use App\Models\ClinicSetting;
 use App\Models\Service;
 use App\Models\TimeBlock;
 use App\Services\AvailabilityService;
@@ -95,7 +96,7 @@ class AvailabilityServiceTest extends TestCase
 
     public function test_max_advance_hides_far_future_days(): void
     {
-        config(['booking.max_advance_days' => 7]);
+        ClinicSetting::current()->update(['max_advance_days' => 7]);
         // Tuesday two weeks out is beyond the window.
         $this->assertSame([], $this->slotTimes('2026-06-30'));
     }
@@ -184,7 +185,7 @@ class AvailabilityServiceTest extends TestCase
     public function test_dst_transition_day_keeps_wall_clock_slots(): void
     {
         // Sydney DST starts 2026-10-04 (Sunday): 02:00 → 03:00.
-        config(['booking.max_advance_days' => 180]); // bring October into the window
+        ClinicSetting::current()->update(['max_advance_days' => 180]); // bring October into the window
         AvailabilityRule::create(['day_of_week' => 0, 'start_time' => '09:00', 'end_time' => '17:00']);
 
         $slots = $this->slotTimes('2026-10-04');
