@@ -17,7 +17,7 @@ We handle your information in accordance with the *Privacy Act 1988* (Cth), the 
 | ABN | {{ABN}} |
 | Address | Suite 1, 67 Jacaranda Ave, Bradbury NSW 2560 |
 | Phone | 1300 205 970 |
-| Privacy contact | macarthurinfusions@outlook.com |
+| Privacy contact | macarthurinfusions@gmail.com |
 | Postal | Suite 1, 67 Jacaranda Ave, Bradbury NSW 2560 |
 
 ## 2. What we collect
@@ -95,7 +95,7 @@ Under the Privacy Act and NSW Health Records and Information Privacy Act, you ha
 - **Correct** information that is inaccurate, out-of-date, incomplete, or misleading.
 - **Complain** about how we have handled your information.
 
-To make a request, email **macarthurinfusions@outlook.com** or write to us at the postal address above. We will respond within 30 days. There is no fee for making a request, though we may charge a small fee for the actual cost of producing copies of records.
+To make a request, email **macarthurinfusions@gmail.com** or write to us at the postal address above. We will respond within 30 days. There is no fee for making a request, though we may charge a small fee for the actual cost of producing copies of records.
 
 If you are not satisfied with our response, you can complain to the Office of the Australian Information Commissioner:
 
@@ -118,6 +118,6 @@ The current published version is identified in the page footer and in our intern
 
 For any privacy question or to make an access or correction request, contact our Privacy Officer:
 
-- Email: **macarthurinfusions@outlook.com**
+- Email: **macarthurinfusions@gmail.com**
 - Phone: 1300 205 970
 - Post: Suite 1, 67 Jacaranda Ave, Bradbury NSW 2560

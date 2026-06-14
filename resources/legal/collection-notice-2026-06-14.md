@@ -26,7 +26,7 @@ In Australia (AWS Sydney). Your contact details and treatment notes are encrypte
 
 ## Your rights
 
-You can access your information, ask us to correct it, or complain about how we have handled it — email **macarthurinfusions@outlook.com**. You can also complain to the Office of the Australian Information Commissioner at <https://www.oaic.gov.au>.
+You can access your information, ask us to correct it, or complain about how we have handled it — email **macarthurinfusions@gmail.com**. You can also complain to the Office of the Australian Information Commissioner at <https://www.oaic.gov.au>.
 
 ## Full policy
 
